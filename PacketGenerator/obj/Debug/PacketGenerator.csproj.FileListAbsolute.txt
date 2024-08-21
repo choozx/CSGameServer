@@ -1,0 +1,16 @@
+D:\RiderProjects\CSGameServer\PacketGenerator\bin\PacketGenerator.exe
+D:\RiderProjects\CSGameServer\PacketGenerator\bin\PacketGenerator.deps.json
+D:\RiderProjects\CSGameServer\PacketGenerator\bin\PacketGenerator.runtimeconfig.json
+D:\RiderProjects\CSGameServer\PacketGenerator\bin\PacketGenerator.runtimeconfig.dev.json
+D:\RiderProjects\CSGameServer\PacketGenerator\bin\PacketGenerator.dll
+D:\RiderProjects\CSGameServer\PacketGenerator\bin\PacketGenerator.pdb
+D:\RiderProjects\CSGameServer\PacketGenerator\obj\Debug\PacketGenerator.csproj.AssemblyReference.cache
+D:\RiderProjects\CSGameServer\PacketGenerator\obj\Debug\PacketGenerator.GeneratedMSBuildEditorConfig.editorconfig
+D:\RiderProjects\CSGameServer\PacketGenerator\obj\Debug\PacketGenerator.AssemblyInfoInputs.cache
+D:\RiderProjects\CSGameServer\PacketGenerator\obj\Debug\PacketGenerator.AssemblyInfo.cs
+D:\RiderProjects\CSGameServer\PacketGenerator\obj\Debug\PacketGenerator.csproj.CoreCompileInputs.cache
+D:\RiderProjects\CSGameServer\PacketGenerator\obj\Debug\PacketGenerator.dll
+D:\RiderProjects\CSGameServer\PacketGenerator\obj\Debug\PacketGenerator.pdb
+D:\RiderProjects\CSGameServer\PacketGenerator\obj\Debug\PacketGenerator.genruntimeconfig.cache
+D:\RiderProjects\CSGameServer\PacketGenerator\bin\Google.Protobuf.dll
+D:\RiderProjects\CSGameServer\PacketGenerator\obj\Debug\PacketGenerator.csproj.CopyComplete

@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "BwmicdneyhLvo+/l08LgR+3FNZGteiva3mk/XFK9nGZ++1F2l59c7PBcfW2cJ8Lg0kfaZB7pLIuTCocX8LXuuw==",
+  "success": true,
+  "projectFilePath": "D:\\RiderProjects\\CSGameServer\\Server\\Server.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\유제현\\.nuget\\packages\\google.protobuf\\3.27.0-rc1\\google.protobuf.3.27.0-rc1.nupkg.sha512",
+    "C:\\Users\\유제현\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
+    "C:\\Users\\유제현\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.2\\system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512"
+  ],
+  "logs": []
+}
