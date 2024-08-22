@@ -10,18 +10,18 @@ namespace Server
     {
         static Listener _listener = new Listener();
 
-        static void FlushRoom()
+        static void BaseTick()
         {
             GameRoom gameRoom = RoomManager.Instance.Find(1);
-            gameRoom.Push(gameRoom.TickUpdate);
-            JobTimer.Instance.Push(FlushRoom, 100);
+            gameRoom.Push(gameRoom.BaseTickUpdate);
+            JobTimer.Instance.Push(BaseTick, 100);
         }
         
-        static void MonsterTimer()
+        static void MonsterTick()
         {
             GameRoom gameRoom = RoomManager.Instance.Find(1);
-            gameRoom.Push(gameRoom.TickUpdate);
-            JobTimer.Instance.Push(MonsterTimer, 5000);
+            gameRoom.Push(gameRoom.MonsterTickUpdate);
+            JobTimer.Instance.Push(MonsterTick, 5000);
         }
 
         static void Main(string[] args)
@@ -36,7 +36,9 @@ namespace Server
             _listener.Init(endPoint, () => { return SessionManager.Instance.Generate(); });
             Console.WriteLine("Listening...");
             
-            JobTimer.Instance.Push(FlushRoom);
+            // GAME TICK
+            JobTimer.Instance.Push(BaseTick);
+            JobTimer.Instance.Push(MonsterTick);
 
             while (true)
             {

@@ -49,6 +49,7 @@ class PacketHandler
 		
 		AttackInfo attackInfo = new AttackInfo();
 		
+		// TODO 총알뿐만 아니라 다른 무기도 처리해야됨
 		attackInfo.ObjectInfo = projectile.BaseInfo;
 		attackInfo.ProjectileType = ProjectileType.Bullet;
 		attackInfo.Damage = 10;

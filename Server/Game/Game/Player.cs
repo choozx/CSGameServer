@@ -7,7 +7,6 @@ namespace Server.Game
 {
     public class Player : GameObject
     {
-        // public PlayerInfo Info { get; set; } = new PlayerInfo();
         public int PlayerId { get; set; }
         public string Name { get; set; }
 

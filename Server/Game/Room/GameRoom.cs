@@ -45,6 +45,12 @@ namespace Server.Game
                         p.Session.Send(spawnPacket);
                 }
             }
+            
+            // 몬스터 정보 전송
+            List<MonsterInfo> monsterInfos = MonsterManager.Instance.GetMonsterInfoDictionary();
+            S_MonsterSpawn monsterSpawn = new S_MonsterSpawn();
+            monsterSpawn.Monsters.AddRange(monsterInfos);
+            newPlayer.Session.Send(monsterSpawn);
         }
 
         public void LeaveGame(int playerId)
@@ -74,10 +80,14 @@ namespace Server.Game
             }
         }
 
-        public void TickUpdate()
+        public void BaseTickUpdate()
         {
             ProjectileManager.Instance.Update();
-            // MonsterManager.Instance.Update(this);
+        }
+
+        public void MonsterTickUpdate()
+        {
+            MonsterManager.Instance.Update(this);
         }
 
         public void Broadcast(IMessage packet)
