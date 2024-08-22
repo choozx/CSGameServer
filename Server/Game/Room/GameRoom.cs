@@ -77,7 +77,7 @@ namespace Server.Game
         public void TickUpdate()
         {
             ProjectileManager.Instance.Update();
-            MonsterManager.Instance.Update(this);
+            // MonsterManager.Instance.Update(this);
         }
 
         public void Broadcast(IMessage packet)

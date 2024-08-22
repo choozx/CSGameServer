@@ -11,7 +11,13 @@ namespace Server.Game
 
         public void Update(GameRoom room)
         {
-            
+            lock (_lock)
+            {
+                foreach (var monster in _monsters.Values)
+                {
+                    monster.Update();
+                }
+            }
         }
 
         private Monster Add()
@@ -24,6 +30,14 @@ namespace Server.Game
             }
 
             return monster;
+        }
+        
+        public bool Remove(int objectId)
+        {
+            lock (_lock)
+            {
+                return _monsters.Remove(objectId);
+            }
         }
     }
 }

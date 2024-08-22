@@ -12,14 +12,22 @@ namespace Server
 
         static void FlushRoom()
         {
-            JobTimer.Instance.Push(FlushRoom, 250);
+            GameRoom gameRoom = RoomManager.Instance.Find(1);
+            gameRoom.Push(gameRoom.TickUpdate);
+            JobTimer.Instance.Push(FlushRoom, 100);
+        }
+        
+        static void MonsterTimer()
+        {
+            GameRoom gameRoom = RoomManager.Instance.Find(1);
+            gameRoom.Push(gameRoom.TickUpdate);
+            JobTimer.Instance.Push(MonsterTimer, 5000);
         }
 
         static void Main(string[] args)
         {
             RoomManager.Instance.Add();
 
-            // DNS (Domain Name System)
             string host = Dns.GetHostName();
             IPHostEntry ipHost = Dns.GetHostEntry(host);
             IPAddress ipAddr = ipHost.AddressList[0];
@@ -27,15 +35,14 @@ namespace Server
 
             _listener.Init(endPoint, () => { return SessionManager.Instance.Generate(); });
             Console.WriteLine("Listening...");
-
-            //FlushRoom();
-            // JobTimer.Instance.Push(FlushRoom);
+            
+            JobTimer.Instance.Push(FlushRoom);
 
             while (true)
             {
-                // JobTimer.Instance.Flush();
-                GameRoom gameRoom = RoomManager.Instance.Find(1);
-                gameRoom.Push(gameRoom.TickUpdate);
+                JobTimer.Instance.Flush();
+                // GameRoom gameRoom = RoomManager.Instance.Find(1);
+                // gameRoom.Push(gameRoom.TickUpdate);
                 Thread.Sleep(100);
             }
         }
