@@ -4,7 +4,6 @@ namespace Server.Game
 {
     public class Monster : GameObject
     {
-        public int _monsterId;
         public int _hp;
         public MonsterType _monsterType;
         public Monster()

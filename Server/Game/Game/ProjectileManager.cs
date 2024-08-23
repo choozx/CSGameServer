@@ -46,6 +46,7 @@ namespace Server.Game
         {
             lock (_lock)
             {
+                ObjectManager.Instance.Remove(objectId);
                 return _projectiles.Remove(objectId);
             }
         }

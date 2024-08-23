@@ -60,4 +60,18 @@ class PacketHandler
 		
 		clientSession.MyPlayer.Room.Broadcast(resAttackPacket);
 	}
+
+	public static void C_HitHandler(PacketSession session, IMessage packet)
+	{
+		C_Hit hitPacket = packet as C_Hit;
+		ClientSession clientSession = session as ClientSession;
+
+		ProjectileManager.Instance.Remove(hitPacket.ProjectileObjectId);
+		MonsterManager.Instance.Remove(hitPacket.MonsterObjectId);
+
+		S_Despawn resHitPacket = new S_Despawn();
+		resHitPacket.ObjectIds.Add(hitPacket.MonsterObjectId);
+		resHitPacket.ObjectIds.Add(hitPacket.ProjectileObjectId);
+		clientSession.MyPlayer.Room.Broadcast(resHitPacket);
+	}
 }

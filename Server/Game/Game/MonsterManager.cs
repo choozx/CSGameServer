@@ -10,7 +10,6 @@ namespace Server.Game
         private object _lock = new object();
         private Dictionary<int, Monster> _monsters = new Dictionary<int, Monster>();
         private int _maxMonsterCount = 10;
-        private int _monsterId = 1;
 
         public void Update(GameRoom room)
         {
@@ -29,11 +28,10 @@ namespace Server.Game
                         Monster monster = Add(room);
 
                         MonsterInfo monsterInfo = new MonsterInfo();
-                        monsterInfo.MonsterId = monster.BaseInfo.ObjectId;
                         monsterInfo.ObjectInfo = monster.BaseInfo;
                         monsterInfo.MonsterType = monster._monsterType;
                         resMonsterSpawn.Monsters.Add(monsterInfo);
-                        Console.WriteLine($"몬스터 소환! : {monsterInfo.MonsterType}_{monsterInfo.MonsterId}");
+                        Console.WriteLine($"몬스터 소환! : {monsterInfo.MonsterType}_{monsterInfo.ObjectInfo.ObjectId}");
                     }
                     
                     room.Broadcast(resMonsterSpawn);
@@ -53,7 +51,6 @@ namespace Server.Game
             foreach (var monster in _monsters.Values)
             {
                 MonsterInfo monsterInfo = new MonsterInfo();
-                monsterInfo.MonsterId = monster._monsterId;
                 monsterInfo.MonsterType = monster._monsterType;
                 monsterInfo.ObjectInfo = monster.BaseInfo;
                 
@@ -66,6 +63,7 @@ namespace Server.Game
         {
             lock (_lock)
             {
+                ObjectManager.Instance.Remove(objectId);
                 return _monsters.Remove(objectId);
             }
         }
@@ -77,19 +75,15 @@ namespace Server.Game
             lock (_lock)
             {
                 monster.BaseInfo = ObjectManager.Instance.Add(GameObjectType.Monster).BaseInfo;
-                monster._monsterId += _monsterId;
                 monster.Room = room;
                 
                 PositionInfo positionInfo = new PositionInfo();
                 Random random = new Random();
-                int x = random.Next(100);
-                int y = random.Next(100);
-                positionInfo.PosX = x;
-                positionInfo.PosY = y;
+                positionInfo.PosX = random.Next(-100, 100);
+                positionInfo.PosY = random.Next(-100, 100);
                 monster.BaseInfo.PosInfo = positionInfo;
                 
                 _monsters.Add(monster.BaseInfo.ObjectId, monster);
-                _monsterId++;
             }
 
             return monster;
