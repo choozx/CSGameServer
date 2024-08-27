@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 using Google.Protobuf.Protocol;
 
@@ -47,6 +48,20 @@ namespace Server.Game
 
                 return null;
             }
+        }
+
+        public Dictionary<int, Player> GetPlayerDictionary()
+        {
+            return _players;
+        }
+
+        public Vector2 GetPlayerPosition(int playerId)
+        {
+            Player player = _players[playerId];
+
+            PositionInfo posInfo = player.BaseInfo.PosInfo;
+            Vector2 position = new Vector2(posInfo.PosX, posInfo.PosY);
+            return position;
         }
     }
 }

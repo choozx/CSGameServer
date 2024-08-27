@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using Google.Protobuf.Protocol;
 
 namespace Server.Game
@@ -11,7 +12,7 @@ namespace Server.Game
         private Dictionary<int, Monster> _monsters = new Dictionary<int, Monster>();
         private int _maxMonsterCount = 10;
 
-        public void Update(GameRoom room)
+        public void SpawnUpdate(GameRoom room)
         {
             lock (_lock)
             {
@@ -36,12 +37,17 @@ namespace Server.Game
                     
                     room.Broadcast(resMonsterSpawn);
                 }
-                
-                // move and attack
+            }
+        }
+
+        public void BaseUpdate()
+        {
+            lock (_lock)
+            {
                 foreach (var monster in _monsters.Values)
                 {
                     monster.Update();
-                }
+                }   
             }
         }
 
@@ -66,6 +72,26 @@ namespace Server.Game
                 ObjectManager.Instance.Remove(objectId);
                 return _monsters.Remove(objectId);
             }
+        }
+        
+        public int getPlayerIdByclosest(PositionInfo monsterPosInfo, float searchDistance)
+        {
+            int playerId = 0;
+            Vector2 otherVector = new Vector2(monsterPosInfo.PosY, monsterPosInfo.PosX);
+
+            Dictionary<int, Player> players = PlayerManager.Instance.GetPlayerDictionary();
+            foreach (var player in players)
+            {
+                PositionInfo playerPosInfo = player.Value.BaseInfo.PosInfo;
+
+                Vector2 playerVector = new Vector2(playerPosInfo.PosY, playerPosInfo.PosX);
+
+                float distance = Vector2.Distance(otherVector, playerVector);
+
+                if (searchDistance >= distance)
+                    playerId = player.Key;
+            }
+            return playerId;
         }
         
         private Monster Add(GameRoom room)

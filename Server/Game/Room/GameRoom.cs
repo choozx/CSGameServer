@@ -83,11 +83,12 @@ namespace Server.Game
         public void BaseTickUpdate()
         {
             ProjectileManager.Instance.Update();
+            MonsterManager.Instance.BaseUpdate();
         }
 
-        public void MonsterTickUpdate()
+        public void MonsterSpawnTickUpdate()
         {
-            MonsterManager.Instance.Update(this);
+            MonsterManager.Instance.SpawnUpdate(this);
         }
 
         public void Broadcast(IMessage packet)

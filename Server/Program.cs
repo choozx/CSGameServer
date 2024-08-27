@@ -17,11 +17,11 @@ namespace Server
             JobTimer.Instance.Push(BaseTick, 100);
         }
         
-        static void MonsterTick()
+        static void SpawnMonsterTick()
         {
             GameRoom gameRoom = RoomManager.Instance.Find(1);
-            gameRoom.Push(gameRoom.MonsterTickUpdate);
-            JobTimer.Instance.Push(MonsterTick, 5000);
+            gameRoom.Push(gameRoom.MonsterSpawnTickUpdate);
+            JobTimer.Instance.Push(SpawnMonsterTick, 5000);
         }
 
         static void Main(string[] args)
@@ -38,7 +38,7 @@ namespace Server
             
             // GAME TICK
             JobTimer.Instance.Push(BaseTick);
-            JobTimer.Instance.Push(MonsterTick);
+            JobTimer.Instance.Push(SpawnMonsterTick);
 
             while (true)
             {
