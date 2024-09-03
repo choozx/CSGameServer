@@ -2,4 +2,7 @@
 
 /Common/
 /DummyClient/
+
 /.idea/
+bin/
+obj/
