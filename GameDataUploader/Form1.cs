@@ -18,10 +18,10 @@ namespace GameDataUploader
     
     public partial class Form1 : Form
     {
-        private AppDBContext _repository;
+        private AppDBContext _context;
         public Form1()
         {
-            _repository = new AppDBContext();
+            _context = new AppDBContext();
             InitializeComponent();
         }
 
@@ -34,21 +34,21 @@ namespace GameDataUploader
                 int rowCount = worksheet.Dimension.Rows;
                 int colCount = worksheet.Dimension.Columns;
 
-                List<Wall> walls = new List<Wall>();
+                List<Tile> tiles = new List<Tile>();
                 for (int i = 1; i < rowCount; i++)
                 {
                     for (int j = 1; j < colCount; j++)
                     {
                         if (worksheet.Cells[i, j].Value.Equals("x"))
                         {
-                            Wall wall = new Wall(){MapId = 1, X = j, Y = i};
-                            walls.Add(wall);
+                            Tile tile = new Tile(){MapId = 1, X = j, Y = i};
+                            tiles.Add(tile);
                         }
                     }
                 }
                 
-                _repository.map.AddRange(walls);
-                _repository.SaveChanges();
+                _context.Tile.AddRange(tiles);
+                _context.SaveChanges();
             }
         }
 

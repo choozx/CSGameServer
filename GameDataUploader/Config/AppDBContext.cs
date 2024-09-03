@@ -7,9 +7,9 @@ namespace GameDataUploader
 {
     public class AppDBContext : DbContext
     {
-        public DbSet<Wall> map { get; set; }
+        public DbSet<Tile> Tile { get; set; }
 
-        private const string connectionString = @"Server=localhost\SQLEXPRESS;Database=inspector-game;Trusted_Connection=True;";
+        private const string connectionString = @"Server=localhost\SQLEXPRESS;Database=inspector-spec;Trusted_Connection=True;";
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

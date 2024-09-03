@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Net;
 using System.Threading;
+using Server.Config;
 using Server.Game;
+using Server.Game.Spec;
 using ServerCore;
+using Tile = Server.Game.Tile;
 
 namespace Server
 {
@@ -26,8 +29,15 @@ namespace Server
 
         static void Main(string[] args)
         {
+            SpecDBContext.InitializeDB();
+            GameDBContext.InitializeDB();
+            Console.WriteLine("Init DB");
+            
+            // 게임 데이터 리로드
+            SpecManager.Instance.LoadAll();
+            
             RoomManager.Instance.Add();
-
+            
             string host = Dns.GetHostName();
             IPHostEntry ipHost = Dns.GetHostEntry(host);
             IPAddress ipAddr = ipHost.AddressList[0];
@@ -43,8 +53,6 @@ namespace Server
             while (true)
             {
                 JobTimer.Instance.Flush();
-                // GameRoom gameRoom = RoomManager.Instance.Find(1);
-                // gameRoom.Push(gameRoom.TickUpdate);
                 Thread.Sleep(100);
             }
         }

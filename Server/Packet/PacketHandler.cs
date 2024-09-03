@@ -18,7 +18,10 @@ class PacketHandler
 		if (clientSession.MyPlayer.Room == null)
 			return;
 		
-		// TODO : 검증
+		// 검증
+		bool canGo = MapManager.Instance.CanGo(movePacket.PosInfo, 1); // 임시 mapId 1 지정
+		if (!canGo)
+			return;
 		
 		// 일단 서버에서 좌표 이동
 		PlayerInfo info = clientSession.MyPlayer.PlayerInfo;
@@ -28,8 +31,6 @@ class PacketHandler
 		S_Move resMovePacket = new S_Move();
 		resMovePacket.ObjectId = clientSession.MyPlayer.BaseInfo.ObjectId;
 		resMovePacket.PosInfo = movePacket.PosInfo;
-		
-		Console.WriteLine($"{clientSession.MyPlayer.PlayerId} | {resMovePacket}");
 		
 		clientSession.MyPlayer.Room.Broadcast(resMovePacket);
 	}

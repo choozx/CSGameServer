@@ -28,6 +28,7 @@ namespace Server.Game
             else
             {
                 Move();
+                
             }
         }
 
