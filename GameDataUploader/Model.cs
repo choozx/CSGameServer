@@ -7,7 +7,7 @@ namespace GameDataUploader
     {
         public int TileId { get; set; }
         public int MapId { get; set; }
-        public int X { get; set; }
-        public int Y { get; set; }
+        public short X { get; set; }
+        public short Y { get; set; }
     }
 }

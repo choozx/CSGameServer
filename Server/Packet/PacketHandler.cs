@@ -5,6 +5,7 @@ using Google.Protobuf.Protocol;
 using ServerCore;
 using Server;
 using Server.Game;
+using Server.Game.Spec;
 
 class PacketHandler
 {
@@ -19,8 +20,8 @@ class PacketHandler
 			return;
 		
 		// 검증
-		bool canGo = MapManager.Instance.CanGo(movePacket.PosInfo, 1); // 임시 mapId 1 지정
-		if (!canGo)
+		SpecMap specMap = SpecManager.GetSpec<SpecMap>(typeof(SpecMap));
+		if (specMap.CantGo(1, movePacket.PosInfo))
 			return;
 		
 		// 일단 서버에서 좌표 이동

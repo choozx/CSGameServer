@@ -9,8 +9,8 @@ namespace Server.Game
         public GameObject Owner { get; set; }
         public float moveDistance { get; set; } = 0;
         
-        private readonly float _speed = 250.0f;
-        private float _maxDistance = 10000.0f;
+        private readonly float _speed = 50.0f;
+        private float _maxDistance = 2000.0f;
 
         public override void Update()
         {

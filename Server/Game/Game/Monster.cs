@@ -1,50 +1,43 @@
+using System.Numerics;
 using Google.Protobuf.Protocol;
+using Roy_T.AStar.Grids;
 
 namespace Server.Game
 {
     public class Monster : GameObject
     {
-        public int _hp;
-        public float _speed;
-        public MonsterType _monsterType;
+        public int Hp;
+        public float Speed;
+        public MonsterType MonsterType;
         
-        public int _targetPlayerId;
-        public float _searchDistance;
-        public float _chaseDistance;
+        public int TargetPlayerId;
+        public float SearchDistance;
+        public float ChaseDistance;
+
+        public int MapId;
 
         public Monster()
         {
             ObjectType = GameObjectType.Monster;
-            _targetPlayerId = 0;
+            TargetPlayerId = 0;
         }
 
         public void Update()
         {
-            if (_targetPlayerId == 0)
+            if (TargetPlayerId == 0)
             {
                 // 범위안에 타겟 플레이어 찾기
-                _targetPlayerId = MonsterManager.Instance.getPlayerIdByclosest(BaseInfo.PosInfo, _searchDistance);
+                TargetPlayerId = MonsterManager.Instance.getPlayerIdByclosest(BaseInfo.PosInfo, SearchDistance);
             }
             else
             {
                 Move();
-                
             }
         }
 
         protected virtual void Move()
         {
             
-        }
-        
-        public void Release()
-        {
-            ObjectManager.Instance.Remove(BaseInfo.ObjectId);
-            MonsterManager.Instance.Remove(BaseInfo.ObjectId);
-
-            S_Despawn despawnPacket = new S_Despawn();
-            despawnPacket.ObjectIds.Add(BaseInfo.ObjectId);
-            Room.Broadcast(despawnPacket);
         }
     }
 }

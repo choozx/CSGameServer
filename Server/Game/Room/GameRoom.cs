@@ -47,7 +47,7 @@ namespace Server.Game
             }
             
             // 몬스터 정보 전송
-            List<MonsterInfo> monsterInfos = MonsterManager.Instance.GetMonsterInfoDictionary();
+            List<MonsterInfo> monsterInfos = MonsterManager.Instance.GetMonsterInfoList();
             S_MonsterSpawn monsterSpawn = new S_MonsterSpawn();
             monsterSpawn.Monsters.AddRange(monsterInfos);
             newPlayer.Session.Send(monsterSpawn);

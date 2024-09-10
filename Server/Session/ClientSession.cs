@@ -33,8 +33,8 @@ namespace Server
                 MyPlayer.Name = $"Player_{MyPlayer.PlayerId}";
                 MyPlayer.BaseInfo.PosInfo.State = CreatureState.Idle;
                 MyPlayer.BaseInfo.PosInfo.MoveDir = MoveDir.Down;
-                MyPlayer.BaseInfo.PosInfo.PosX = 0;
-                MyPlayer.BaseInfo.PosInfo.PosY = 0;
+                MyPlayer.BaseInfo.PosInfo.PosX = 50;
+                MyPlayer.BaseInfo.PosInfo.PosY = 50;
 
                 MyPlayer.Session = this;
             }

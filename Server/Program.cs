@@ -5,7 +5,6 @@ using Server.Config;
 using Server.Game;
 using Server.Game.Spec;
 using ServerCore;
-using Tile = Server.Game.Tile;
 
 namespace Server
 {
@@ -31,7 +30,6 @@ namespace Server
         {
             SpecDBContext.InitializeDB();
             GameDBContext.InitializeDB();
-            Console.WriteLine("Init DB");
             
             // 게임 데이터 리로드
             SpecManager.Instance.LoadAll();

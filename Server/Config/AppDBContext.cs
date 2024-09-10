@@ -25,6 +25,7 @@ namespace Server.Config
 
                 db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
+                Console.WriteLine("Init GameDB");
             }
         }
     }
@@ -50,6 +51,7 @@ namespace Server.Config
 
                 db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
+                Console.WriteLine("Init SpecDB");
             }
         }
     }

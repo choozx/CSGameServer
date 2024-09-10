@@ -10,7 +10,7 @@ namespace Server.Game
         public static MonsterManager Instance { get; } = new MonsterManager();
         private object _lock = new object();
         private Dictionary<int, Monster> _monsters = new Dictionary<int, Monster>();
-        private int _maxMonsterCount = 10;
+        private int _maxMonsterCount = 1;
 
         public void SpawnUpdate(GameRoom room)
         {
@@ -30,7 +30,7 @@ namespace Server.Game
 
                         MonsterInfo monsterInfo = new MonsterInfo();
                         monsterInfo.ObjectInfo = monster.BaseInfo;
-                        monsterInfo.MonsterType = monster._monsterType;
+                        monsterInfo.MonsterType = monster.MonsterType;
                         resMonsterSpawn.Monsters.Add(monsterInfo);
                         Console.WriteLine($"몬스터 소환! : {monsterInfo.MonsterType}_{monsterInfo.ObjectInfo.ObjectId}");
                     }
@@ -51,13 +51,13 @@ namespace Server.Game
             }
         }
 
-        public List<MonsterInfo> GetMonsterInfoDictionary()
+        public List<MonsterInfo> GetMonsterInfoList()
         {
             List<MonsterInfo> monsterInfos = new List<MonsterInfo>();
             foreach (var monster in _monsters.Values)
             {
                 MonsterInfo monsterInfo = new MonsterInfo();
-                monsterInfo.MonsterType = monster._monsterType;
+                monsterInfo.MonsterType = monster.MonsterType;
                 monsterInfo.ObjectInfo = monster.BaseInfo;
                 
                 monsterInfos.Add(monsterInfo);
@@ -105,8 +105,8 @@ namespace Server.Game
                 
                 PositionInfo positionInfo = new PositionInfo();
                 Random random = new Random();
-                positionInfo.PosX = random.Next(-100, 100);
-                positionInfo.PosY = random.Next(-100, 100);
+                positionInfo.PosX = random.Next(1, 99);
+                positionInfo.PosY = random.Next(1, 99);
                 monster.BaseInfo.PosInfo = positionInfo;
                 
                 _monsters.Add(monster.BaseInfo.ObjectId, monster);

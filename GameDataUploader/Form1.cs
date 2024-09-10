@@ -33,15 +33,16 @@ namespace GameDataUploader
                 ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
                 int rowCount = worksheet.Dimension.Rows;
                 int colCount = worksheet.Dimension.Columns;
-
+                int mapId = int.Parse(worksheet.Name);
+                
                 List<Tile> tiles = new List<Tile>();
-                for (int i = 1; i < rowCount; i++)
+                for (int i = 0; i < rowCount; i++)
                 {
-                    for (int j = 1; j < colCount; j++)
+                    for (int j = 0; j < colCount; j++)
                     {
-                        if (worksheet.Cells[i, j].Value.Equals("x"))
+                        if (worksheet.Cells[i + 1, j + 1].Value.Equals(0.0))
                         {
-                            Tile tile = new Tile(){MapId = 1, X = j, Y = i};
+                            Tile tile = new Tile(){MapId = mapId, X = (short)j, Y = (short)(rowCount - (i+1))};
                             tiles.Add(tile);
                         }
                     }
@@ -50,6 +51,8 @@ namespace GameDataUploader
                 _context.Tile.AddRange(tiles);
                 _context.SaveChanges();
             }
+
+            Console.WriteLine("업로드 완료");
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
