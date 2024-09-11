@@ -20,7 +20,7 @@ namespace Server.Game
                 projectile.BaseInfo = ObjectManager.Instance.Add(GameObjectType.Projectile).BaseInfo;
                 projectile.Room = player.Room;
                 
-                PositionInfo positionInfo = player.BaseInfo.PosInfo;
+                PositionInfo positionInfo = new PositionInfo(player.BaseInfo.PosInfo);
                 projectile.BaseInfo.PosInfo = positionInfo;
                 projectile._normalizeVector = normalizeVector;
                 projectile._initPosition = new Vector2(positionInfo.PosX, positionInfo.PosY);

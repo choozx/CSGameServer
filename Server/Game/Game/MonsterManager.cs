@@ -10,7 +10,7 @@ namespace Server.Game
         public static MonsterManager Instance { get; } = new MonsterManager();
         private object _lock = new object();
         private Dictionary<int, Monster> _monsters = new Dictionary<int, Monster>();
-        private int _maxMonsterCount = 1;
+        private int _maxMonsterCount = 10;
 
         public void SpawnUpdate(GameRoom room)
         {
@@ -105,8 +105,8 @@ namespace Server.Game
                 
                 PositionInfo positionInfo = new PositionInfo();
                 Random random = new Random();
-                positionInfo.PosX = random.Next(1, 99);
-                positionInfo.PosY = random.Next(1, 99);
+                positionInfo.PosX = random.Next(10, 90);
+                positionInfo.PosY = random.Next(10, 40);
                 monster.BaseInfo.PosInfo = positionInfo;
                 
                 _monsters.Add(monster.BaseInfo.ObjectId, monster);

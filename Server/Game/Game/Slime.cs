@@ -38,7 +38,6 @@ namespace Server.Game
             //     return;
             // }
             
-            // TODO 왜 장해물에 나갔다 들어오면 다시 추격을 안하지?
             var destination = Navigation.FindPath(monsterVector, playerVector, MapId);
             if (destination == null)
             {

@@ -68,12 +68,12 @@ namespace Server.Game.Spec
             return map.IsWall(positionInfo);
         }
 
-        public bool IsOutMap(Vector2 vector)
+        public bool IsOutMap(PositionInfo position)
         {
-            if (vector.X < 0 || (int)vector.X >= MaxX)
+            if (position.PosX < 0 || (int)position.PosX >= MaxX)
                 return true;
             
-            if (vector.Y < 0 || (int)vector.Y >= MaxY)
+            if (position.PosY < 0 || (int)position.PosY >= MaxY)
                 return true;
 
             return false;

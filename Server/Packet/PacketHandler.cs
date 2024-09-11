@@ -19,19 +19,27 @@ class PacketHandler
 		if (clientSession.MyPlayer.Room == null)
 			return;
 		
+		PlayerInfo info = clientSession.MyPlayer.PlayerInfo;
+		
 		// 검증
 		SpecMap specMap = SpecManager.GetSpec<SpecMap>(typeof(SpecMap));
+		if (specMap.IsOutMap(info.ObjectInfo.PosInfo))
+		{
+			// Init position
+			info.ObjectInfo.PosInfo.PosX = 50;
+			info.ObjectInfo.PosInfo.PosY = 77;
+		}
+		
 		if (specMap.CantGo(1, movePacket.PosInfo))
 			return;
 		
 		// 일단 서버에서 좌표 이동
-		PlayerInfo info = clientSession.MyPlayer.PlayerInfo;
 		info.ObjectInfo.PosInfo = movePacket.PosInfo;
 		
 		// 다른 플레이어한테도 알려준다
 		S_Move resMovePacket = new S_Move();
 		resMovePacket.ObjectId = clientSession.MyPlayer.BaseInfo.ObjectId;
-		resMovePacket.PosInfo = movePacket.PosInfo;
+		resMovePacket.PosInfo = info.ObjectInfo.PosInfo;
 		
 		clientSession.MyPlayer.Room.Broadcast(resMovePacket);
 	}
